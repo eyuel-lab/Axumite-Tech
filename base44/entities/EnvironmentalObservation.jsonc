@@ -1,0 +1,144 @@
+{
+    "type": "object",
+    "properties": {
+        "field_id": {
+            "type": "string",
+            "description": "Field the observation was retrieved for"
+        },
+        "dataset_key": {
+            "type": "string",
+            "description": "Dataset key, e.g. nasa_power"
+        },
+        "product_id": {
+            "type": "string",
+            "description": "Official product identifier"
+        },
+        "observation_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the observation (local solar day)"
+        },
+        "precipitation_mm": {
+            "type": "number",
+            "description": "Daily corrected total precipitation, mm/day; null when unavailable"
+        },
+        "temp_max_c": {
+            "type": "number",
+            "description": "Daily maximum air temperature at 2 m, \u00b0C; null when unavailable"
+        },
+        "temp_min_c": {
+            "type": "number",
+            "description": "Daily minimum air temperature at 2 m, \u00b0C; null when unavailable"
+        },
+        "temp_mean_c": {
+            "type": "number",
+            "description": "Daily mean air temperature at 2 m, \u00b0C; null when unavailable"
+        },
+        "humidity_mean_pct": {
+            "type": "number",
+            "description": "Daily mean relative humidity at 2 m, %; null when unavailable"
+        },
+        "wind_mean_ms": {
+            "type": "number",
+            "description": "Daily mean wind speed at 2 m, m/s; null when unavailable"
+        },
+        "solar_mj_m2": {
+            "type": "number",
+            "description": "All-sky surface shortwave downward irradiance, MJ/m\u00b2/day; null when unavailable"
+        },
+        "rootzone_wetness_frac": {
+            "type": "number",
+            "description": "Root-zone soil wetness, fraction of saturation (model-derived land surface estimate); null when unavailable"
+        },
+        "missing_parameters": {
+            "type": "array",
+            "description": "Parameters with no value on this date (never filled with a guess)",
+            "items": {
+                "type": "string"
+            }
+        },
+        "quality_flag": {
+            "type": "string",
+            "description": "Product quality / screening note"
+        },
+        "processing_method": {
+            "type": "string",
+            "description": "How the value was produced"
+        },
+        "spatial_resolution": {
+            "type": "string",
+            "description": "Grid resolution of the source product"
+        },
+        "temporal_resolution": {
+            "type": "string",
+            "description": "Temporal resolution"
+        },
+        "sample_latitude": {
+            "type": "number",
+            "description": "Latitude of the grid cell centre sampled"
+        },
+        "sample_longitude": {
+            "type": "number",
+            "description": "Longitude of the grid cell centre sampled"
+        },
+        "source_url": {
+            "type": "string",
+            "description": "Retrieval URL"
+        },
+        "retrieved_at": {
+            "type": "string",
+            "description": "Retrieval timestamp (ISO 8601)"
+        },
+        "notes": {
+            "type": "string",
+            "description": "Additional context"
+        }
+    },
+    "required": [
+        "field_id",
+        "dataset_key",
+        "observation_date"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    },
+    "name": "EnvironmentalObservation"
+}

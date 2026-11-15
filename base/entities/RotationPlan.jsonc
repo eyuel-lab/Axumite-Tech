@@ -1,0 +1,111 @@
+{
+    "name": "RotationPlan",
+    "type": "object",
+    "properties": {
+        "field_id": {
+            "type": "string",
+            "description": "Field the plan belongs to"
+        },
+        "name": {
+            "type": "string",
+            "description": "Plan name"
+        },
+        "notes": {
+            "type": "string",
+            "description": "Objective and context for this comparison"
+        },
+        "start_year": {
+            "type": "number",
+            "description": "First season year of the sequences"
+        },
+        "weight_soil_health": {
+            "type": "number",
+            "description": "Priority weight, soil health and organic matter (0-5)"
+        },
+        "weight_nitrogen": {
+            "type": "number",
+            "description": "Priority weight, nitrogen supply (0-5)"
+        },
+        "weight_water": {
+            "type": "number",
+            "description": "Priority weight, water balance and climate resilience (0-5)"
+        },
+        "weight_pest": {
+            "type": "number",
+            "description": "Priority weight, pest and disease break (0-5)"
+        },
+        "weight_erosion": {
+            "type": "number",
+            "description": "Priority weight, erosion and soil cover (0-5)"
+        },
+        "engine_version": {
+            "type": "string",
+            "description": "Evaluation engine version used for the stored result"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "draft",
+                "evaluated"
+            ],
+            "enumColors": [
+                "gray",
+                "green"
+            ],
+            "description": "Whether a comparison has been stored"
+        },
+        "evaluated_at": {
+            "type": "string",
+            "description": "Timestamp of the stored evaluation (ISO 8601)"
+        },
+        "result": {
+            "type": "object",
+            "description": "Stored evaluation snapshot used by reports and the assistant"
+        }
+    },
+    "required": [
+        "field_id",
+        "name"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    }
+}

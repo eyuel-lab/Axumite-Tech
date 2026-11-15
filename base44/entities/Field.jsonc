@@ -1,0 +1,146 @@
+{
+    "type": "object",
+    "properties": {
+        "farm_id": {
+            "type": "string",
+            "description": "Owning farm record id"
+        },
+        "name": {
+            "type": "string",
+            "description": "Field name"
+        },
+        "description": {
+            "type": "string",
+            "description": "Description of the field"
+        },
+        "country": {
+            "type": "string",
+            "description": "Country"
+        },
+        "admin_area": {
+            "type": "string",
+            "description": "Region, zone or district"
+        },
+        "latitude": {
+            "type": "number",
+            "description": "Centre point latitude (not the boundary)"
+        },
+        "longitude": {
+            "type": "number",
+            "description": "Centre point longitude (not the boundary)"
+        },
+        "boundary": {
+            "type": "array",
+            "description": "Field boundary as ordered [lat, lng] vertices",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "lat": {
+                        "type": "number"
+                    },
+                    "lng": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "area_hectares": {
+            "type": "number",
+            "description": "Field area in hectares"
+        },
+        "area_source": {
+            "type": "string",
+            "enum": [
+                "computed_polygon",
+                "manual_entry",
+                "unspecified"
+            ],
+            "enumColors": [
+                "green",
+                "yellow",
+                "gray"
+            ],
+            "description": "How the area was obtained"
+        },
+        "current_crop": {
+            "type": "string",
+            "description": "Crop currently grown"
+        },
+        "irrigation": {
+            "type": "string",
+            "enum": [
+                "rainfed",
+                "supplemental",
+                "full_irrigation",
+                "unknown"
+            ],
+            "enumColors": [
+                "yellow",
+                "blue",
+                "green",
+                "gray"
+            ],
+            "description": "Irrigation availability"
+        },
+        "water_source": {
+            "type": "string",
+            "description": "Water access, e.g. borehole, river, none"
+        },
+        "practices": {
+            "type": "array",
+            "description": "Farming practices in use",
+            "items": {
+                "type": "string"
+            }
+        },
+        "notes": {
+            "type": "string",
+            "description": "Notes and observations"
+        }
+    },
+    "required": [
+        "name"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    },
+    "name": "Field"
+}

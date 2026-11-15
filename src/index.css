@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 42 33% 95%;
+        --foreground: 152 9% 13%;
+        --card: 40 40% 99%;
+        --card-foreground: 152 9% 13%;
+        --popover: 40 40% 99%;
+        --popover-foreground: 152 9% 13%;
+        --primary: 157 44% 21%;
+        --primary-foreground: 42 33% 96%;
+        --secondary: 150 12% 90%;
+        --secondary-foreground: 157 30% 18%;
+        --muted: 42 24% 91%;
+        --muted-foreground: 90 5% 40%;
+        --accent: 150 14% 89%;
+        --accent-foreground: 157 30% 18%;
+        --destructive: 6 62% 45%;
+        --destructive-foreground: 40 40% 99%;
+        --border: 44 22% 84%;
+        --input: 44 22% 82%;
+        --ring: 157 44% 30%;
+        --radius: 0.375rem;
+
+        --forest: 160 33% 13%;
+        --forest-foreground: 42 30% 92%;
+        --gold: 38 44% 48%;
+        --gold-foreground: 40 45% 97%;
+        --gold-soft: 40 46% 91%;
+        --sage: 145 16% 34%;
+        --clay: 20 38% 42%;
+
+        --chart-1: 157 44% 27%;
+        --chart-2: 38 44% 52%;
+        --chart-3: 145 20% 45%;
+        --chart-4: 20 38% 52%;
+        --chart-5: 190 25% 40%;
+
+        --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+        --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        --font-display: 'Fraunces', Georgia, serif;
+        --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+        --sidebar-background: 160 33% 13%;
+        --sidebar-foreground: 42 30% 92%;
+        --sidebar-primary: 38 44% 48%;
+        --sidebar-primary-foreground: 160 33% 13%;
+        --sidebar-accent: 160 28% 19%;
+        --sidebar-accent-foreground: 42 30% 94%;
+        --sidebar-border: 160 24% 24%;
+        --sidebar-ring: 38 44% 52%;
+    }
+
+    .dark {
+        --background: 160 12% 8%;
+        --foreground: 42 28% 93%;
+        --card: 160 12% 11%;
+        --card-foreground: 42 28% 93%;
+        --popover: 160 12% 11%;
+        --popover-foreground: 42 28% 93%;
+        --primary: 148 30% 60%;
+        --primary-foreground: 160 20% 10%;
+        --secondary: 160 10% 17%;
+        --secondary-foreground: 42 28% 93%;
+        --muted: 160 10% 16%;
+        --muted-foreground: 45 12% 65%;
+        --accent: 160 10% 18%;
+        --accent-foreground: 42 28% 93%;
+        --destructive: 6 55% 45%;
+        --destructive-foreground: 40 40% 99%;
+        --border: 160 10% 20%;
+        --input: 160 10% 22%;
+        --ring: 148 30% 55%;
+
+        --forest: 160 18% 11%;
+        --forest-foreground: 42 25% 90%;
+        --gold: 38 48% 58%;
+        --gold-foreground: 160 20% 10%;
+        --gold-soft: 40 20% 22%;
+        --sage: 145 14% 55%;
+
+        --chart-1: 148 30% 58%;
+        --chart-2: 38 48% 60%;
+        --chart-3: 145 18% 48%;
+        --chart-4: 20 40% 58%;
+        --chart-5: 190 25% 55%;
+
+        --sidebar-background: 160 16% 9%;
+        --sidebar-foreground: 42 25% 90%;
+        --sidebar-primary: 38 48% 58%;
+        --sidebar-primary-foreground: 160 16% 9%;
+        --sidebar-accent: 160 14% 15%;
+        --sidebar-accent-foreground: 42 25% 94%;
+        --sidebar-border: 160 12% 18%;
+        --sidebar-ring: 38 48% 58%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground font-body antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-heading;
+        font-variation-settings: 'SOFT' 0, 'WONK' 0;
+    }
+}
+
+@layer utilities {
+    .label-eyebrow {
+        @apply text-[11px] font-semibold uppercase tracking-[0.18em];
+    }
+
+    .figure {
+        @apply font-mono tabular-nums;
+    }
+
+    .rule-gold {
+        @apply h-px w-10 bg-gold;
+    }
+}
+
+.leaflet-container {
+    font-family: var(--font-body);
+    background: hsl(var(--muted));
+}

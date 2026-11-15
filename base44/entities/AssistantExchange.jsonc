@@ -1,0 +1,81 @@
+{
+    "name": "AssistantExchange",
+    "type": "object",
+    "properties": {
+        "field_id": {
+            "type": "string",
+            "description": "Field the question was scoped to"
+        },
+        "plan_id": {
+            "type": "string",
+            "description": "Rotation plan the question was scoped to"
+        },
+        "question": {
+            "type": "string",
+            "description": "Question asked"
+        },
+        "answer": {
+            "type": "string",
+            "description": "Answer returned by the assistant"
+        },
+        "data_used": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Stored records the answer was grounded in"
+        },
+        "caveats": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Gaps and uncertainty the assistant flagged"
+        }
+    },
+    "required": [
+        "question",
+        "answer"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    }
+}

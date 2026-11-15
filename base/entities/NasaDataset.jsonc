@@ -1,0 +1,95 @@
+{
+    "type": "object",
+    "properties": {
+        "key": {
+            "type": "string",
+            "description": "Internal dataset key, e.g. nasa_power"
+        },
+        "name": {
+            "type": "string",
+            "description": "Dataset display name"
+        },
+        "provider": {
+            "type": "string",
+            "description": "Data provider"
+        },
+        "product_id": {
+            "type": "string",
+            "description": "Official product identifier"
+        },
+        "description": {
+            "type": "string",
+            "description": "What the dataset contains"
+        },
+        "spatial_resolution": {
+            "type": "string",
+            "description": "Spatial resolution and grid"
+        },
+        "temporal_resolution": {
+            "type": "string",
+            "description": "Temporal resolution and coverage"
+        },
+        "units_note": {
+            "type": "string",
+            "description": "Units of the stored parameters"
+        },
+        "processing_method": {
+            "type": "string",
+            "description": "How values are produced"
+        },
+        "limitations": {
+            "type": "string",
+            "description": "Known scientific limitations"
+        },
+        "availability": {
+            "type": "string",
+            "enum": [
+                "available",
+                "requires_credentials",
+                "deferred"
+            ],
+            "enumColors": [
+                "green",
+                "yellow",
+                "gray"
+            ],
+            "description": "Whether the platform can retrieve it now"
+        },
+        "access_note": {
+            "type": "string",
+            "description": "What is needed to access it"
+        },
+        "source_url": {
+            "type": "string",
+            "description": "Official documentation URL"
+        },
+        "sort_order": {
+            "type": "number",
+            "description": "Display order"
+        }
+    },
+    "required": [
+        "key",
+        "name",
+        "availability"
+    ],
+    "rls": {
+        "read": {},
+        "create": {
+            "user_condition": {
+                "role": "admin"
+            }
+        },
+        "update": {
+            "user_condition": {
+                "role": "admin"
+            }
+        },
+        "delete": {
+            "user_condition": {
+                "role": "admin"
+            }
+        }
+    },
+    "name": "NasaDataset"
+}

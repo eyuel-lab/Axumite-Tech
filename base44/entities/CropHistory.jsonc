@@ -1,0 +1,81 @@
+{
+    "type": "object",
+    "properties": {
+        "field_id": {
+            "type": "string",
+            "description": "Field the history entry belongs to"
+        },
+        "crop_name": {
+            "type": "string",
+            "description": "Crop grown"
+        },
+        "season_year": {
+            "type": "number",
+            "description": "Calendar year the season started"
+        },
+        "season_label": {
+            "type": "string",
+            "description": "Local season name, e.g. Belg, Meher"
+        },
+        "planting_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Planting date if known"
+        },
+        "harvest_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Harvest date if known"
+        },
+        "notes": {
+            "type": "string",
+            "description": "Notes"
+        }
+    },
+    "required": [
+        "field_id",
+        "crop_name"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    },
+    "name": "CropHistory"
+}

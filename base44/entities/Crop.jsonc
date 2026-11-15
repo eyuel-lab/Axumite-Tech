@@ -1,0 +1,231 @@
+{
+    "name": "Crop",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Common crop name"
+        },
+        "scientific_name": {
+            "type": "string",
+            "description": "Botanical name"
+        },
+        "aliases": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Other names used locally"
+        },
+        "family": {
+            "type": "string",
+            "description": "Botanical family \u2014 the unit used for rotation breaks"
+        },
+        "crop_group": {
+            "type": "string",
+            "enum": [
+                "cereal",
+                "pulse",
+                "oilseed",
+                "root_tuber",
+                "vegetable",
+                "forage",
+                "other"
+            ],
+            "enumColors": [
+                "yellow",
+                "green",
+                "purple",
+                "red",
+                "pink",
+                "blue",
+                "gray"
+            ],
+            "description": "Agronomic group"
+        },
+        "cycle_days": {
+            "type": "number",
+            "description": "Indicative days from sowing to maturity"
+        },
+        "growing_seasons": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Seasons the crop is normally grown in"
+        },
+        "nitrogen_fixation_kg_ha": {
+            "type": "number",
+            "description": "Indicative symbiotic nitrogen fixed per hectare in a good crop"
+        },
+        "nitrogen_demand_kg_ha": {
+            "type": "number",
+            "description": "Indicative nitrogen removed in the harvested crop"
+        },
+        "phosphorus_demand_kg_ha": {
+            "type": "number",
+            "description": "Indicative phosphorus removed in the harvested crop"
+        },
+        "potassium_demand_kg_ha": {
+            "type": "number",
+            "description": "Indicative potassium removed in the harvested crop"
+        },
+        "water_demand_mm": {
+            "type": "number",
+            "description": "Indicative seasonal crop water requirement"
+        },
+        "rooting_depth_cm": {
+            "type": "number",
+            "description": "Typical effective rooting depth"
+        },
+        "residue_index": {
+            "type": "string",
+            "enum": [
+                "low",
+                "medium",
+                "high"
+            ],
+            "enumColors": [
+                "red",
+                "yellow",
+                "green"
+            ],
+            "description": "How much surface residue the crop leaves"
+        },
+        "soil_cover_index": {
+            "type": "string",
+            "enum": [
+                "poor",
+                "moderate",
+                "good"
+            ],
+            "enumColors": [
+                "red",
+                "yellow",
+                "green"
+            ],
+            "description": "How completely the canopy covers the soil during the season"
+        },
+        "ph_min": {
+            "type": "number",
+            "description": "Lower pH limit for acceptable growth"
+        },
+        "ph_max": {
+            "type": "number",
+            "description": "Upper pH limit for acceptable growth"
+        },
+        "drainage_requirement": {
+            "type": "string",
+            "enum": [
+                "well_drained",
+                "moderate",
+                "tolerant_waterlogging"
+            ],
+            "enumColors": [
+                "red",
+                "yellow",
+                "green"
+            ],
+            "description": "Drainage the crop needs"
+        },
+        "heat_tolerance_c": {
+            "type": "number",
+            "description": "Maximum daily temperature normally tolerated"
+        },
+        "frost_tolerance": {
+            "type": "string",
+            "enum": [
+                "none",
+                "low",
+                "moderate",
+                "high"
+            ],
+            "enumColors": [
+                "red",
+                "yellow",
+                "green",
+                "green"
+            ],
+            "description": "Frost tolerance class"
+        },
+        "salinity_tolerance": {
+            "type": "string",
+            "enum": [
+                "low",
+                "moderate",
+                "high"
+            ],
+            "enumColors": [
+                "red",
+                "yellow",
+                "green"
+            ],
+            "description": "Salinity tolerance class"
+        },
+        "disease_notes": {
+            "type": "string",
+            "description": "Key soil-borne and residue-borne problems"
+        },
+        "rotation_role": {
+            "type": "string",
+            "description": "Role the crop plays in a sequence"
+        },
+        "literature_basis": {
+            "type": "string",
+            "description": "Where the indicative ranges come from"
+        },
+        "confidence": {
+            "type": "string",
+            "enum": [
+                "high",
+                "medium",
+                "low"
+            ],
+            "enumColors": [
+                "green",
+                "yellow",
+                "red"
+            ],
+            "description": "Confidence in the trait ranges"
+        },
+        "notes": {
+            "type": "string",
+            "description": "Free notes"
+        }
+    },
+    "required": [
+        "name",
+        "family",
+        "crop_group"
+    ],
+    "rls": {
+        "read": {},
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    }
+}

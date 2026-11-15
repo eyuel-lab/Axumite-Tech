@@ -1,0 +1,110 @@
+{
+    "type": "object",
+    "properties": {
+        "field_id": {
+            "type": "string",
+            "description": "Field the retrieval was made for"
+        },
+        "dataset_key": {
+            "type": "string",
+            "description": "Dataset key"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "success",
+                "partial",
+                "failed",
+                "cached"
+            ],
+            "enumColors": [
+                "green",
+                "yellow",
+                "red",
+                "blue"
+            ],
+            "description": "Outcome of the retrieval"
+        },
+        "http_status": {
+            "type": "number",
+            "description": "HTTP status from the provider"
+        },
+        "requested_start": {
+            "type": "string",
+            "format": "date",
+            "description": "Requested start date"
+        },
+        "requested_end": {
+            "type": "string",
+            "format": "date",
+            "description": "Requested end date"
+        },
+        "records_written": {
+            "type": "number",
+            "description": "Observation rows stored"
+        },
+        "duration_ms": {
+            "type": "number",
+            "description": "Retrieval duration in milliseconds"
+        },
+        "message": {
+            "type": "string",
+            "description": "Human-readable outcome or failure reason"
+        },
+        "summary": {
+            "type": "object",
+            "description": "Derived indicators computed from the retrieved series"
+        },
+        "retrieved_at": {
+            "type": "string",
+            "description": "Retrieval timestamp (ISO 8601)"
+        }
+    },
+    "required": [
+        "field_id",
+        "dataset_key",
+        "status"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    },
+    "name": "NasaFetchLog"
+}

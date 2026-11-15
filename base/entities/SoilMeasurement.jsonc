@@ -1,0 +1,133 @@
+{
+    "type": "object",
+    "properties": {
+        "field_id": {
+            "type": "string",
+            "description": "Field the measurement belongs to"
+        },
+        "parameter": {
+            "type": "string",
+            "enum": [
+                "soil_texture",
+                "sand_pct",
+                "silt_pct",
+                "clay_pct",
+                "ph",
+                "organic_carbon_g_kg",
+                "organic_matter_pct",
+                "nitrogen_g_kg",
+                "phosphorus_mg_kg",
+                "potassium_mg_kg",
+                "depth_cm",
+                "water_holding_capacity_mm_m",
+                "salinity_ds_m",
+                "drainage_class"
+            ],
+            "enumColors": [
+                "gray",
+                "yellow",
+                "yellow",
+                "yellow",
+                "blue",
+                "green",
+                "green",
+                "green",
+                "purple",
+                "purple",
+                "gray",
+                "blue",
+                "red",
+                "gray"
+            ],
+            "description": "Measured soil parameter"
+        },
+        "value": {
+            "type": "number",
+            "description": "Numeric value where applicable"
+        },
+        "text_value": {
+            "type": "string",
+            "description": "Text value for class-based parameters"
+        },
+        "unit": {
+            "type": "string",
+            "description": "Unit of the numeric value"
+        },
+        "provenance": {
+            "type": "string",
+            "enum": [
+                "laboratory_measured",
+                "farmer_reported",
+                "regional_satellite_estimate",
+                "model_derived"
+            ],
+            "enumColors": [
+                "green",
+                "yellow",
+                "blue",
+                "gray"
+            ],
+            "description": "How this value was obtained"
+        },
+        "method_source": {
+            "type": "string",
+            "description": "Laboratory, test kit or method used"
+        },
+        "sample_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date the sample was taken or tested"
+        },
+        "notes": {
+            "type": "string",
+            "description": "Context for the measurement"
+        }
+    },
+    "required": [
+        "field_id",
+        "parameter",
+        "provenance"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    },
+    "name": "SoilMeasurement"
+}

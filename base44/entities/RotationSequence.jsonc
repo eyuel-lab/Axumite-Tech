@@ -1,0 +1,88 @@
+{
+    "name": "RotationSequence",
+    "type": "object",
+    "properties": {
+        "plan_id": {
+            "type": "string",
+            "description": "Rotation plan the sequence belongs to"
+        },
+        "field_id": {
+            "type": "string",
+            "description": "Field the sequence is evaluated for"
+        },
+        "name": {
+            "type": "string",
+            "description": "Sequence name, e.g. Current practice or Option B"
+        },
+        "sort_order": {
+            "type": "number",
+            "description": "Display and comparison order"
+        },
+        "entries": {
+            "type": "array",
+            "description": "Seasons in order, earliest first",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "crop_id": {
+                        "type": "string"
+                    },
+                    "crop_name": {
+                        "type": "string"
+                    },
+                    "season_year": {
+                        "type": "number"
+                    },
+                    "season_label": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "plan_id",
+        "name"
+    ],
+    "rls": {
+        "read": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "create": {
+            "created_by_id": "{{user.id}}"
+        },
+        "update": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        },
+        "delete": {
+            "$or": [
+                {
+                    "created_by_id": "{{user.id}}"
+                },
+                {
+                    "user_condition": {
+                        "role": "admin"
+                    }
+                }
+            ]
+        }
+    }
+}
